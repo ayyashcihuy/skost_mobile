@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_apps/pages/login.dart';
-import 'package:mobile_apps/pages/register.dart';
+import 'package:mobile_apps/features/auth/presentation/pages/login.dart';
+import 'package:mobile_apps/features/auth/presentation/pages/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       routes: {
-        '/login': (context) => const LoginPage(),
+        '/login': (context) => LoginPageWidget(),
         '/register': (context) => const RegisterPage()
       },
-      home: const LoginPage(),
+      home: LoginPageWidget(),
     );
   }
 }
