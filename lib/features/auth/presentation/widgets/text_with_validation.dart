@@ -1,54 +1,63 @@
 import 'package:flutter/material.dart';
 
 class TextSubmitWidget extends StatefulWidget {
-  const TextSubmitWidget({ 
-    super.key, 
-    required this.onSubmit, 
+  const TextSubmitWidget({
+    super.key,
+    required this.onChange,
     this.labelText = 'Input',
     this.hintText = 'Masukkan input',
     this.keyboardType = TextInputType.text,
-    this.validator
+    this.validator,
+    this.isPassword = false, // Add this parameter
   });
 
-  final ValueChanged<String> onSubmit;
+  final ValueChanged<String> onChange;
   final String labelText;
   final String hintText;
   final TextInputType keyboardType;
   final String? Function(String?)? validator;
+  final bool isPassword; // Indicate if this field is for password input
 
   @override
   State<TextSubmitWidget> createState() => _TextSubmitWidgetState();
 }
 
 class _TextSubmitWidgetState extends State<TextSubmitWidget> {
+  bool _obscureText = true; // Manage password visibility state
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(padding: const EdgeInsets.only(left:16, right: 20), 
+        Padding(
+          padding: const EdgeInsets.only(left: 16, right: 20),
           child: Text(
             widget.labelText,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
               color: Colors.black,
               fontFamily: 'JakartaSans',
-              letterSpacing: 0
+              letterSpacing: 0,
             ),
           ),
         ),
         Container(
-          margin: EdgeInsets.only(top: 8, left: 16, right: 16),
+          margin: const EdgeInsets.only(top: 8, left: 16, right: 16),
           child: TextFormField(
             decoration: InputDecoration(
               filled: true,
               alignLabelWithHint: false,
               fillColor: Colors.white,
-              contentPadding: EdgeInsets.only(left: 16, right: 16),
+              contentPadding: const EdgeInsets.only(left: 16, right: 16),
               hintText: widget.hintText,
-              hintStyle: TextStyle(
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(100),
+                borderSide: const BorderSide(color: Color(0xFFDBDBDB), width: 1),
+              ),
+              hintStyle: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFF757575),
@@ -56,30 +65,44 @@ class _TextSubmitWidgetState extends State<TextSubmitWidget> {
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(100),
-                borderSide: const BorderSide(color: Color(0xFFDBDBDB)),
+                borderSide: const BorderSide(color: Color(0xFFDBDBDB), width: 1),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(100),
-                borderSide: const BorderSide(color: Colors.black, width: 2)  
+                borderSide: const BorderSide(color: Color(0xFFDBDBDB), width: 2),
               ),
-              errorStyle: TextStyle(
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(100),
+                borderSide: const BorderSide(color: Color(0xFFDBDBDB), width: 2),
+              ),
+              errorStyle: const TextStyle(
                 fontWeight: FontWeight.w700,
-                color: Color(0xFFE74C3C)
+                color: Color(0xFFE74C3C),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(100),
-                borderSide: const BorderSide(color: Colors.black, width: 2)
+                borderSide: const BorderSide(color: Colors.black, width: 1),
               ),
-              errorText: null, // Changes with error states
+              errorText: null,
+              suffixIcon: widget.isPassword
+                  ? IconButton(
+                      icon: Icon(
+                        _obscureText ? Icons.visibility_off : Icons.visibility,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      },
+                    )
+                  : null,
             ),
-            keyboardType: TextInputType.text,
+            keyboardType: widget.keyboardType,
             textInputAction: TextInputAction.next,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Nama lengkap harus diisi';
-              }
-              return null;
-            },
+            onChanged: widget.onChange,
+            validator: widget.validator,
+            obscureText: widget.isPassword ? _obscureText : false, // Hide text if password
           ),
         ),
       ],
