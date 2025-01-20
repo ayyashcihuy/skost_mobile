@@ -10,10 +10,6 @@ class OtpPage extends StatefulWidget {
 }
 
 class _OtpPageState extends State<OtpPage> {
-  final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController _otpController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,16 +21,17 @@ class _OtpPageState extends State<OtpPage> {
 
   Column _formInput() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SizedBox(height: 92),
         TitleWidget(title: 'Verifikasi OTP', description: "Masukkan kode OTP yang telah kami kirimkan ke email Anda untuk melanjutkan"),
         SizedBox(height: 16),
         OtpWidget(
-          length: 6,
+          length: 5,
           onCompleted: (otp) {
             setState(() {
-              Navigator.pushNamed(context, '/createPassword');
+              print("OTP: $otp");
+              // Navigator.pushNamed(context, '/createPassword');
             });
           },
         )

@@ -22,6 +22,24 @@ class RegisterClient {
     }
   }
 
+  Future<dynamic> otpSubmission(String url, { Map<String, dynamic>? body }) async {
+    var uri = Uri.parse(url);
+
+    try {
+      var response = await http.post(
+        uri,
+        headers:<String, String>{ 
+          "Content-Type": "application/json" 
+        },
+        body: body != null ? jsonEncode(body) : null,
+      );
+
+      return _processResponse(response);
+    } catch (e) {
+      throw ExceptionHandlers().getExceptionString(e);
+    }
+  }
+
   dynamic _processResponse(http.Response response) {
     switch (response.statusCode) {
       case 200 || 201:

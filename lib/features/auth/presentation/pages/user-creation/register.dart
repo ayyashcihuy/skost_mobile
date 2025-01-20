@@ -72,6 +72,8 @@ class RegisterPageState extends State<RegisterPage> {
         occupation: _occupationController.text,
       ).toJson();
 
+      print(body);
+
       try {
         await registerCustomer(body);
         // Show success message (e.g., Snackbar or dialog)
