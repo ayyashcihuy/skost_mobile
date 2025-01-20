@@ -5,10 +5,10 @@ class OtpWidget extends StatefulWidget {
   final ValueChanged<String> onCompleted;
 
   const OtpWidget({
-    Key? key,
+    super.key,
     this.length = 6,
     required this.onCompleted,
-  }) : super(key: key);
+  });
 
   @override
   State<OtpWidget> createState() => _OtpWidgetState();

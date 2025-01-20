@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:mobile_apps/features/auth/data/states/registration_state.dart';
+import 'package:provider/provider.dart';
 import 'package:mobile_apps/features/auth/presentation/pages/user-creation/create-password.dart';
 import 'package:mobile_apps/features/auth/presentation/pages/user-creation/forgot-password.dart';
 import 'package:mobile_apps/features/auth/presentation/pages/user-creation/login.dart';
@@ -8,7 +10,14 @@ import 'package:mobile_apps/features/auth/presentation/pages/user-creation/regis
 
 void main() async {
   await dotenv.load();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => RegistrationState()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

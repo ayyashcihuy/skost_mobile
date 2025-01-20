@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobile_apps/features/auth/api/register.dart';
 import 'package:mobile_apps/features/auth/data/models/register.dart';
+import 'package:mobile_apps/features/auth/data/states/registration_state.dart';
 import 'package:mobile_apps/features/auth/presentation/widgets/dropdown_with_value.dart';
 import 'package:mobile_apps/features/auth/presentation/widgets/text_with_validation.dart';
 import 'package:mobile_apps/features/auth/presentation/widgets/title_widget.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -46,6 +48,7 @@ class RegisterPageState extends State<RegisterPage> {
       );
       
       // Process the response if needed (e.g., show success dialog/snackbar)
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Registration successful!')),
       );
@@ -72,19 +75,21 @@ class RegisterPageState extends State<RegisterPage> {
         occupation: _occupationController.text,
       ).toJson();
 
-      print(body);
-
       try {
         await registerCustomer(body);
-        // Show success message (e.g., Snackbar or dialog)
+
+        if (!mounted) return;
+        context.read<RegistrationState>().setEmail(body['email']);
         Navigator.pushNamed(context, '/otp');
       } catch (e) {
         // Show error message
         rethrow;
       } finally {
-        setState(() {
-          _isLoading = false;
-        });
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
       }
     }
   }

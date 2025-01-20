@@ -166,25 +166,25 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
 
   Column _emailInput() {
     return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextSubmitWidget(
-              labelText: "Email",
-              hintText: "Masukkan email Anda",
-              onChange: (value) {
-                setState(() {
-                  _emailController.text = value;
-                });
-              },
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Email harus diisi';
-                }
-                return null;
-              },
-            ),
-          ],
-        );
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextSubmitWidget(
+          labelText: "Email",
+          hintText: "Masukkan email Anda",
+          onChange: (value) {
+            setState(() {
+              _emailController.text = value;
+            });
+          },
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Email harus diisi';
+            }
+            return null;
+          },
+        ),
+      ],
+    );
   }
 
   AppBar appBar() {
