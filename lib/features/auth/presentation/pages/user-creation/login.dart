@@ -117,11 +117,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     return Container(
       margin: EdgeInsets.only(top: 8, left: 16, right: 16),
       child: ElevatedButton(
-        onPressed: () {
-          if (_formkey.currentState!.validate()) {
-
-          }
-        },
+        onPressed: () => Navigator.pushNamed(context, "/home"),
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100),

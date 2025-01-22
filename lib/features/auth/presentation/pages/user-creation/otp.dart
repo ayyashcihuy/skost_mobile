@@ -17,7 +17,6 @@ class OtpPage extends StatefulWidget {
 class _OtpPageState extends State<OtpPage> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
-  bool _verifySubmit = false;
 
   // Otp Controller
   final TextEditingController _otpController = TextEditingController();
@@ -92,8 +91,6 @@ class _OtpPageState extends State<OtpPage> {
         otp: _otpController.text,
       ).toJson();
 
-      print("body: $body");
-
       try {
         await otpSubmission(body);
 
@@ -140,7 +137,6 @@ class _OtpPageState extends State<OtpPage> {
           onCompleted: (otp) {
             setState(() {
               _otpController.text = otp;
-              _verifySubmit = true;
             });
           },
         ),

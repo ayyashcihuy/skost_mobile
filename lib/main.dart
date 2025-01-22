@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobile_apps/features/auth/data/states/registration_state.dart';
+import 'package:mobile_apps/features/auth/presentation/pages/user-creation/navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_apps/features/auth/presentation/pages/user-creation/create-password.dart';
 import 'package:mobile_apps/features/auth/presentation/pages/user-creation/forgot-password.dart';
@@ -36,11 +37,12 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       routes: {
-        '/login': (context) => LoginPageWidget(),
+        '/login': (context) => const LoginPageWidget(),
         '/register': (context) => const RegisterPage(),
         '/otp': (context) => const OtpPage(),
         '/createPassword': (context) => const CreatePasswordPage(),
         '/forgotPassword': (context) => const ForgotPasswordPage(),
+        '/home': (context) => const NavigationBarApp(),
       },
       home: LoginPageWidget(),
     );

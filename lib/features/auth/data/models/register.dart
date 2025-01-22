@@ -16,6 +16,7 @@ class RegisterAlbum {
   factory RegisterAlbum.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {
+        // ignore: constant_identifier_names
         'full_name': String full_name,
         'gender': String gender,
         'email': String email,

@@ -1,7 +1,6 @@
 flutter_native_splash:
+  color: "#2A2E54"
+  image: assets/logo/bookost_logo.png
   android: true
   ios: true
   web: false
-
-  color: "#2A2E54"
-  image: "assets/logo/bookost_logo.png"
