@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mobile_apps/features/auth/presentation/widgets/search_bar.dart';
+import 'package:mobile_apps/features/auth/presentation/pages/main/home.dart';
 
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
@@ -84,7 +84,8 @@ class _NavigationExampleState extends State<NavigationExample> {
       body: <Widget>[
 
         /// Home page
-        SearchBarWidget(),
+        HomeWidget(),
+
 
         Card(
           shadowColor: Colors.transparent,

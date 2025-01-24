@@ -92,10 +92,10 @@ class _OtpPageState extends State<OtpPage> {
       ).toJson();
 
       try {
-        await otpSubmission(body);
+        // await otpSubmission(body);
 
-        // Add headers if needed (e.g., for JSON content type)
-        if (!mounted) return;
+        // // Add headers if needed (e.g., for JSON content type)
+        // if (!mounted) return;
         Navigator.pushNamed(context, '/createPassword');
       } catch (e) {
         // Handle exceptions or show error messages to the user
