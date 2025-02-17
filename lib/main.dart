@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_apps/pages/login.dart';
-import 'package:mobile_apps/pages/register.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:mobile_apps/features/auth/data/states/registration_state.dart';
+import 'package:mobile_apps/features/auth/presentation/pages/main/navigation.dart';
+import 'package:provider/provider.dart';
+import 'package:mobile_apps/features/auth/presentation/pages/user-creation/create-password.dart';
+import 'package:mobile_apps/features/auth/presentation/pages/user-creation/forgot-password.dart';
+import 'package:mobile_apps/features/auth/presentation/pages/user-creation/login.dart';
+import 'package:mobile_apps/features/auth/presentation/pages/user-creation/otp.dart';
+import 'package:mobile_apps/features/auth/presentation/pages/user-creation/register.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await dotenv.load();
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => RegistrationState()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,10 +37,14 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       routes: {
-        '/login': (context) => const LoginPage(),
-        '/register': (context) => const RegisterPage()
+        '/login': (context) => const LoginPageWidget(),
+        '/register': (context) => const RegisterPage(),
+        '/otp': (context) => const OtpPage(),
+        '/createPassword': (context) => const CreatePasswordPage(),
+        '/forgotPassword': (context) => const ForgotPasswordPage(),
+        '/home': (context) => const NavigationBarApp(),
       },
-      home: const LoginPage(),
+      home: LoginPageWidget(),
     );
   }
 }

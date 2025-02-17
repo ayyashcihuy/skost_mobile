@@ -1,42 +1,28 @@
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class TitleWidget extends StatelessWidget {
+  const TitleWidget({super.key, required this.title, required this.description});
 
-  @override
-  RegisterPageState createState() => RegisterPageState();
-}
-
-class RegisterPageState extends State<RegisterPage> {
-  final _formKey = GlobalKey<FormState>();
+  final String title;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-      body: SingleChildScrollView(
-        child: _register()
-      ),
-    );
-  }
-
-  Column _register() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // _searchBar(),
-        SizedBox(height: 92),
-        _title(),
-        _titleDescription(),
+        _title(title),
+        SizedBox(height: 8),
+        _titleDescription(description),
       ],
     );
   }
-
-  Padding _title() {
+  
+  Padding _title(String title) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 20),
       child: Text(
-        'Daftar Akun',
+        title,
         style: TextStyle(
           fontSize: 32,
           fontWeight: FontWeight.w600,
@@ -48,17 +34,18 @@ class RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Padding _titleDescription() {
+  Padding _titleDescription(String description) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 20),
       child: Text(
-        'Temukan kenyamanan dan keamanan di Kos Keluarga. Daftarkan diri Anda segera sebelum kehabisan!',
+        description,
         style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w400,
           color: Colors.black,
           fontFamily: 'JakartaSans',
           height: 1.5,
+          letterSpacing: -0.1
         ),
       ),
     );
